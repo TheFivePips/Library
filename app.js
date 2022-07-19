@@ -1,9 +1,8 @@
-const main = document.getElementById("main")
-const addBookBtn = document.querySelector(".add-book")
 
 
-
-
+const cards = document.querySelector('.cards')
+const form = document.getElementById("book-form")
+const addBookBtn = document.getElementById("submit-btn")
 
 const  myLibrary = [
     {
@@ -15,7 +14,17 @@ const  myLibrary = [
     }, 
     
 ]
+myLibrary.forEach(element => {
+    const card = document.createElement('div')
+    card.classList.add("card")
+    card.innerHTML = `
+        <h3>${element.title}</h3>
+        <p>Author: <span>${element.author}</span></p>
+        <p>Pages: <span>${element.pages}</span></p>
+        <p>Read-status: <span>${element.read}</span></p>`
+    cards.appendChild(card)
 
+})
 
 class Book {
     constructor (id, title, author, pages, read){ 
@@ -33,35 +42,31 @@ class Book {
 }
 
 
-
-function addBookToLibrary (book) {
+form.addEventListener("submit", function(e) {
+    e.preventDefault()
+    console.log(document.getElementById("book-title").value)
+   
+    let book = new Book(
+        myLibrary.length +1,
+        document.getElementById("book-title").value,
+        document.getElementById("book-author").value,
+        document.getElementById("book-pages").value,
+        document.getElementById("book-read").value
+    )
     myLibrary.push(book)
-    // for(let i =0; i < myLibrary.length; i++) [
-    //     console.log(myLibrary[i])
-    // ]
-}
 
-let hobbit = new Book(1,"The Hobbit", "JRR Tolkien", 295, "read" )
-
-addBookToLibrary(hobbit)
-
-addBookBtn.addEventListener("click", function() {
-    
-})
+    const card = document.createElement('div')
+    card.classList.add("card")
+    card.innerHTML = `
+        <h3>${book.title}</h3>
+        <p>Author: <span>${book.author}</span></p>
+        <p>Pages: <span>${book.pages}</span></p>
+        <p>Read-status: <span>${book.read}</span></p>`
+    cards.appendChild(card)
 
 
-
-myLibrary.forEach(object => {
-
-    const htmlMarkUp = `<div class="card">
-    <h3>${object.title}</h3>
-    <p>Author: <span>${object.author}</span></p>
-    <p>Pages: <span>${object.pages}</span></p>
-    <p>Read-status: <span>${object.read}</span></p>
-    </div>
-    `
-
-    main.innerHTML += htmlMarkUp
-
-
+   
 });
+
+
+console.log(myLibrary)

@@ -50,6 +50,15 @@
     background-color: aquamarine;
 }
 
+.cards{
+    grid-area: 1/1/3/6;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr)
+    
+    
+
+}
+
 .card{
     border: 1px solid black;
     height: 200px;

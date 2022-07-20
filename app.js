@@ -2,7 +2,9 @@
 
 const cards = document.querySelector('.cards')
 const form = document.getElementById("book-form")
-const addBookBtn = document.getElementById("submit-btn")
+// const addBookBtn = document.getElementById("submit-btn")
+
+
 
 const  myLibrary = [
     {
@@ -21,7 +23,9 @@ myLibrary.forEach(element => {
         <h3>${element.title}</h3>
         <p>Author: <span>${element.author}</span></p>
         <p>Pages: <span>${element.pages}</span></p>
-        <p>Read-status: <span>${element.read}</span></p>`
+        <p>Read-status: <span>${element.read}</span></p>
+        <button id=${element.id}>Remove</button>`
+
     cards.appendChild(card)
 
 })
@@ -44,10 +48,10 @@ class Book {
 
 form.addEventListener("submit", function(e) {
     e.preventDefault()
-    console.log(document.getElementById("book-title").value)
+    // console.log(document.getElementById("book-title").value)
    
     let book = new Book(
-        myLibrary.length +1,
+        myLibrary.length,
         document.getElementById("book-title").value,
         document.getElementById("book-author").value,
         document.getElementById("book-pages").value,
@@ -57,16 +61,30 @@ form.addEventListener("submit", function(e) {
 
     const card = document.createElement('div')
     card.classList.add("card")
+    
     card.innerHTML = `
         <h3>${book.title}</h3>
         <p>Author: <span>${book.author}</span></p>
         <p>Pages: <span>${book.pages}</span></p>
-        <p>Read-status: <span>${book.read}</span></p>`
+        <p>Read-status: <span>${book.read}</span></p>
+        <button id=${book.id}>Remove</button>`
+
+    
+    card.addEventListener('click', function(event) {
+        let btn = event.target
+        // console.log(btn.id)
+        for(let i =0; i< myLibrary.length; i++){
+            if(btn.id === myLibrary[i].id) {
+                myLibrary.splice(btn.id,1)
+            }
+            cards.removeChild(card)
+        }
+    })
+    console.log(myLibrary)
+
     cards.appendChild(card)
 
 
    
 });
 
-
-console.log(myLibrary)

@@ -72,12 +72,14 @@ form.addEventListener("submit", function(e) {
     
     card.addEventListener('click', function(event) {
         let btn = event.target
-        // console.log(btn.id)
-        for(let i =0; i< myLibrary.length; i++){
-            if(btn.id === myLibrary[i].id) {
-                myLibrary.splice(btn.id,1)
+        console.log(btn.id)
+        if(btn.id){
+            for(let i =0; i< myLibrary.length; i++){
+                if(btn.id === myLibrary[i].id) {
+                    myLibrary.splice(btn.id,1)
+                }
+                cards.removeChild(card)
             }
-            cards.removeChild(card)
         }
     })
     // console.log(document.getElementsByName("radio").value)

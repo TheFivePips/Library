@@ -24,9 +24,15 @@
                 <input id="book-title" name="book-title" type="text" placeholder="Title">
                 <input id="book-author" name="book-author" type="text" placeholder="Author">
                 <input id="book-pages" name="book-pages" type="text" placeholder="Pages">
-                <input id="book-read" name="book-read" type="text" placeholder="Read or Not Read">
+                <!-- <input id="book-read" name="book-read" type="radio" placeholder="Read or Not Read"> -->
 
-                <button id="submit-btn" type="submit" value="submit">Submit</button>
+                <div class="radio-btns">
+                    <input type="radio" id="read" name="radio"  value="Read">
+                    <label for="read">Read</label>
+                    <input type="radio" id="not-read" name="radio" checked value="Not-Read">
+                    <label for="not-read">Not Read</label>
+                    <button id="submit-btn" type="submit" value="submit">Submit</button>
+                </div>
 
             </form>
             

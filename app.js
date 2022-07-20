@@ -55,7 +55,7 @@ form.addEventListener("submit", function(e) {
         document.getElementById("book-title").value,
         document.getElementById("book-author").value,
         document.getElementById("book-pages").value,
-        document.getElementById("book-read").value
+        document.querySelector('input[name="radio"]:checked').value
     )
     myLibrary.push(book)
 
@@ -80,7 +80,7 @@ form.addEventListener("submit", function(e) {
             cards.removeChild(card)
         }
     })
-    console.log(myLibrary)
+    // console.log(document.getElementsByName("radio").value)
 
     cards.appendChild(card)
 

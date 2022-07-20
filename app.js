@@ -12,7 +12,7 @@ const  myLibrary = [
         title: 'The Left Hand of Darkness',
         author: 'Ursula K. Le Guin',
         pages: 286,
-        read: 'not read'
+        read: 'Not-Read'
     }, 
     
 ]
@@ -24,6 +24,7 @@ myLibrary.forEach(element => {
         <p>Author: <span>${element.author}</span></p>
         <p>Pages: <span>${element.pages}</span></p>
         <p>Read-status: <span>${element.read}</span></p>
+        <button type="input">Change Read-status</button>
         <button id=${element.id}>Remove</button>`
 
     cards.appendChild(card)
@@ -63,17 +64,18 @@ form.addEventListener("submit", function(e) {
     card.classList.add("card")
     
     card.innerHTML = `
-        <h3>${book.title}</h3>
-        <p>Author: <span>${book.author}</span></p>
-        <p>Pages: <span>${book.pages}</span></p>
-        <p>Read-status: <span>${book.read}</span></p>
-        <button id=${book.id}>Remove</button>`
-
+    <h3>${book.title}</h3>
+    <p>Author: <span>${book.author}</span></p>
+    <p>Pages: <span>${book.pages}</span></p>
+    <p>Read-status: <span id="${book.id}R">${book.read}</span></p>
+    <button type="input">Change Read-status</button>
     
+    <button id=${book.id}>Remove</button>`;
+
     card.addEventListener('click', function(event) {
         let btn = event.target
-        console.log(btn.id)
-        if(btn.id){
+        // console.log(btn.innerHTML)
+        if(btn.id && btn.innerHTML === "Remove"){
             for(let i =0; i< myLibrary.length; i++){
                 if(btn.id === myLibrary[i].id) {
                     myLibrary.splice(btn.id,1)
@@ -81,12 +83,20 @@ form.addEventListener("submit", function(e) {
                 cards.removeChild(card)
             }
         }
+        const statusSpan = document.getElementById(`${book.id}R`)
+        if(btn.innerHTML === "Change Read-status"){
+        //    console.log(statusSpan.innerHTML)
+            if(statusSpan.innerHTML === "Read"){
+                statusSpan.innerHTML = "Not-Read"
+            }
+            else if(statusSpan.innerHTML === "Not-Read"){
+                statusSpan.innerHTML = "Read"
+            }
+            
+        }
     })
-    // console.log(document.getElementsByName("radio").value)
-
+  
     cards.appendChild(card)
-
-
    
 });
 

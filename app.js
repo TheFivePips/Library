@@ -149,10 +149,27 @@ function display_new_book(){
     removeBtn.type = "button"
     removeBtn.innerText = "Remove"
     
-    // i need to attach an event listener onto the remove btns that will remove it from the library and then re-render the library
+    //attach an event listener onto the remove btns that will remove it from the library and then remove it from the page
 
     removeBtn.addEventListener("click", function() {
+        // loop throu library and remove the book at the given index and then remove that card from the cards page
+        for(let i=0; i < myLibrary.length; i++){
+            myLibrary.splice(removeBtn.dataset.id,1)
+            cards.removeChild(card)
+        }
+      
+    })
+// Add a button on each book’s display to change its read status.
+// To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
 
+    const readBtn = document.createElement("button")
+    readBtn.setAttribute("class", "read-status")
+    readBtn.type = "button"
+    readBtn.innerText = "Change Read Status"
+    
+
+    readBtn.addEventListener("click", function() {
+        console.log("clicked")
     })
 
 
@@ -160,6 +177,7 @@ function display_new_book(){
     card.append(bookAuthor)
     card.append(bookPages)
     card.append(bookRead)
+    card.append(readBtn)
     card.append(removeBtn)
 
         
@@ -172,3 +190,5 @@ function display_new_book(){
 
 // Add a button on each book’s display to remove the book from the library.
 //You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
+
+

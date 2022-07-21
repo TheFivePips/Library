@@ -41,6 +41,12 @@ formSubmitBtn.addEventListener("click", function(event) {
     add_to_myLibrary()
     cards.replaceChildren()
     display_library()
+
+    // clear the form after a submission
+    const inputs = document.querySelectorAll("input")
+    inputs.forEach(input => {
+        input.value = ""
+    })
     
 })
 

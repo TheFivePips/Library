@@ -65,13 +65,13 @@ function display_library(){
         const card = document.createElement("div")
         card.setAttribute("class", "card")
         card.setAttribute("id", i)
-        const bookTitle = document.createElement("p")
+        const bookTitle = document.createElement("h3")
         bookTitle.setAttribute("class", "book-title")
         bookTitle.innerText = title
 
         const bookAuthor = document.createElement("p")
         bookAuthor.setAttribute("class", "book-author")
-        bookAuthor.innerText = author
+        bookAuthor.innerText = `Author: ${author}`
 
         const bookPages = document.createElement("p")
         bookPages.setAttribute("class", "book-pages")

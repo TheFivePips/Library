@@ -1,120 +1,174 @@
+const cards = document.querySelector(".cards")
+const myForm = document.getElementById('book-form')
 
-const cards = document.querySelector('.cards')
-const form = document.getElementById("book-form")
+console.log(myForm)
 
 let  myLibrary = [
     {
+    "title": "The Left Hand of Darkness",
     "author": "Ursula",
-    "id": 0,
+    "id": 1,
     "pages": 295,
-    "read": "Not-Read",
-    "title": "The Left Hand of Darkness"
+    "read": false
+    },
+    {
+    "title": "The Hobbit",
+    "author": "Tolkien",
+    "id": 2,
+    "pages": 295,
+    "read": true
+    },
+    {
+    "title": "The Lies of Locke Lamora",
+    "author": "Scott Lynch",
+    "id": 3,
+    "pages": 295,
+    "read": true
     }
 ]
 
-// function showWholeLibrary(){
-//     for(let i= 0; i <myLibrary.length; i++){
-//         const card = document.createElement('div')
-//         card.classList.add("card")
-//         card.setAttribute("id", myLibrary[i])
-//         card.innerHTML = `
-//             <h3>${lastItem.title}</h3>
-//             <p>Author: <span>${lastItem.author}</span></p>
-//             <p>Pages: <span>${lastItem.pages}</span></p>
-//             <p>Read-status: <span id="read-status">${lastItem.read}</span></p>
-//             <button id=${lastItem.id} type="input">Change Read-status</button>
-//             <button id=${lastItem.id}>Remove</button>`
+// display the whole library, just to see what were workign with
+display_library()
+
+// All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array. Your code should look something like this:
+function Book(title, author, id, pages, read) {
+    this.title = title
+    this.author = author
+    this.id = id
+    this.pages = pages
+    this.read = read
+
+}
+
+
+// take a book from the form and put it into the array
+function add_to_myLibrary(){
+    const formTitle = myForm.elements[0].value
+    const formAuthor = myForm.elements[1].value
+    const formPages = myForm.elements[2].value
+    const formRead = document.querySelector('input[name="radio"]:checked').value;
+
+    const newBook = new Book(formTitle, formAuthor, myLibrary.length, formPages, formRead)
+
+    myLibrary.push(newBook)
     
-//     }
-// }
+}
 
-function displayNewCard(){
-    const lastItem = myLibrary[myLibrary.length-1]
 
-    const card = document.createElement('div')
-    card.classList.add("card")
-    card.setAttribute('id', myLibrary.indexOf(lastItem))
-    card.innerHTML = `
-        <h3>${lastItem.title}</h3>
-        <p>Author: <span>${lastItem.author}</span></p>
-        <p>Pages: <span>${lastItem.pages}</span></p>
-        <p>Read-status: <span id="read-status">${lastItem.read}</span></p>
-        <button id=${lastItem.id} type="input">Change Read-status</button>
-        <button id=${lastItem.id}>Remove</button>`
+// event listeners on the submit btn that put the book into the array
+const formSubmitBtn = document.getElementById('submit-btn')
+formSubmitBtn.addEventListener("click", function(event) {
+    event.preventDefault()
+    add_to_myLibrary()
+    // display_library()
+    display_new_book()
+})
 
-    card.addEventListener('click', function(event) {
-        let btn = event.target
+// Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”. It might help for now to manually add a few books to your array so you can see the display.
+
+
+
+// this will dipslay the entire library everytime. need to remove old displays or write a new fucntion that only adds the latest book (see function display_new_book)
+
+function display_library(){
+
+    for(let i=0; i < myLibrary.length; i++){
+
+        let title = myLibrary[i].title
+        let author = myLibrary[i].author
+        let pages = myLibrary[i].pages
+        let read = myLibrary[i].read
+
+        const card = document.createElement("div")
+        card.setAttribute("class", "card")
+
+        const bookTitle = document.createElement("p")
+        bookTitle.setAttribute("class", "book-title")
+        bookTitle.innerText = title
+
+        const bookAuthor = document.createElement("p")
+        bookAuthor.setAttribute("class", "book-author")
+        bookAuthor.innerText = author
+
+        const bookPages = document.createElement("p")
+        bookPages.setAttribute("class", "book-pages")
+        bookPages.innerText = `Pages: ${pages}`
+
+        const bookRead = document.createElement("p")
+        bookRead.setAttribute("class", "book-read")
+        bookRead.innerText = `Read: ${read}`
         
-        if(btn.innerHTML === "Remove"){
-            for(let i =0; i< myLibrary.length; i++){
-                if(btn.id === myLibrary[i].id) {
-                    myLibrary.splice(btn.id,1)
-                }
-                cards.removeChild(card)
-            }
-        }
+        const removeBtn = document.createElement("button")
+        removeBtn.setAttribute("data-id", myLibrary.indexOf(myLibrary[i]))
+        removeBtn.type = "button"
+        removeBtn.innerText = "Remove"
+
+
+        card.append(bookTitle)
+        card.append(bookAuthor)
+        card.append(bookPages)
+        card.append(bookRead)
+        card.append(removeBtn)
+
+        cards.append(card)
+
+
+    }
+}
+
+function display_new_book(){
+    
+    let latestBook = myLibrary[myLibrary.length-1]
+
+    let title = latestBook.title
+    let author = latestBook.author
+    let pages = latestBook.pages
+    let read = latestBook.read
+
+    const card = document.createElement("div")
+    card.setAttribute("class", "card")
+
+    const bookTitle = document.createElement("p")
+    bookTitle.setAttribute("class", "book-title")
+    bookTitle.innerText = title
+
+    const bookAuthor = document.createElement("p")
+    bookAuthor.setAttribute("class", "book-author")
+    bookAuthor.innerText = author
+
+    const bookPages = document.createElement("p")
+    bookPages.setAttribute("class", "book-pages")
+    bookPages.innerText = `Pages: ${pages}`
+
+    const bookRead = document.createElement("p")
+    bookRead.setAttribute("class", "book-read")
+    bookRead.innerText = `Read: ${read}`
+
+    const removeBtn = document.createElement("button")
+    removeBtn.setAttribute("data-id", myLibrary.indexOf(latestBook))
+    removeBtn.type = "button"
+    removeBtn.innerText = "Remove"
+    
+    // i need to attach an event listener onto the remove btns that will remove it from the library and then re-render the library
+
+    removeBtn.addEventListener("click", function() {
+
     })
 
-    const read = card.childNodes[7]
-    console.log(read)
-        // if(btn.innerHTML === "Change Read-status") {
-        //     const statusSpan = document.getElementById("read-status")
-        //     console.log(card.id)
-        //     console.log(card.statusSpan.innerHTML)
-            
-        //     const span = document.getElementById("read-status")
-        //    for(let i =0; i < myLibrary.length; i++){
-        //     if(btn.id === myLibrary[i].id){
-        //        if(myLibrary[i].read === "Read"){
-        //         myLibrary[i].read = "Not-Read"
-        //         span.innerHTML = myLibrary[i].read
-        //        }
-        //        if(myLibrary[i].read === "Not-Read"){
-        //         myLibrary[i].read = "Read"
-        //         span.innerHTML = myLibrary[i].read
 
-        //        }
-        //     }
-        //    }
+    card.append(bookTitle)
+    card.append(bookAuthor)
+    card.append(bookPages)
+    card.append(bookRead)
+    card.append(removeBtn)
 
         
-      
-          
-    cards.appendChild(card)
-}
 
-class Book {
-    constructor (id, title, author, pages, read){ 
-        this.id = id
-        this.title = title
-        this.author = author
-        this.pages = pages
-        this.read = read
-    }
-    toggleRead(id){
-        if(id === this.id){
-            if(this.read === "Read"){
-                this.read === "Not-Read"
-            }
-            if(this.read === "Not-Read"){
-                this.read === "Read"
-            }
-    }
-    }
-}
+    cards.append(card)
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault()
+
     
-    let book = new Book(
-        myLibrary.length,
-        document.getElementById("book-title").value,
-        document.getElementById("book-author").value,
-        document.getElementById("book-pages").value,
-        document.querySelector('input[name="radio"]:checked').value
-    )
-    myLibrary.push(book)
-    displayNewCard()
-   
-});
+}
 
+// Add a button on each book’s display to remove the book from the library.
+//You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.

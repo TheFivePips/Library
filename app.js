@@ -79,8 +79,15 @@ function display_library(){
 
         const bookRead = document.createElement("p")
         bookRead.setAttribute("class", "book-read")
-        bookRead.innerText = `Read: ${read}`
+        if(read){
+            bookRead.innerText = `Read: Yes`
+        }
+        else{
+            bookRead.innerText = `Read: No`
+        }
         
+
+
         // give each book a remove button and a change read-status button
         const removeBtn = document.createElement("button")
         removeBtn.setAttribute("data-id", myLibrary.indexOf(myLibrary[i]))

@@ -5,30 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Library</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="./style.css">
+    
 </head>
 <body>
     <div class="container">
         <div class="heading">
-            <h2 class="project-title">My Library</h2>
-            
 
+            <div class="myLibrary">
+                <span class="material-symbols-outlined">
+                    library_books
+                    </span>
+                <h2 class="project-title">My Library</h2>
+            </div>
         </div>
         <div id="main">
-            <div class="cards">
-
-            </div>
-            <form id="book-form">
+            <div class="cards"></div>
+            <!-- form validation not seeming to work correctly. not sure what the issue is -->
+            <form id="book-form" action="href" method="post">
                 <h4>Add a Book</h4>
 
-                <input id="book-title" name="book-title" type="text" required maxlength="50" placeholder="Title">
-                <input id="book-author" name="book-author" type="text"required placeholder="Author">
-                <input id="book-pages" name="book-pages" required type="text" placeholder="Pages">
+                <input required id="book-title" name="book-title" type="text"maxlength="50" minlength = "1" placeholder="Title"/>
+                <input id="book-author" name="book-author" type="text"required minlength = "1" placeholder="Author"/>
+                <input id="book-pages" name="book-pages" type="text" placeholder="Pages"/>
 
                 <div class="radio-btns">
-                    <input type="radio" id="read" name="radio"  value=true>
+                    <input type="radio" id="read" name="radio" value=true/>
                     <label for="read">Read</label>
-                    <input type="radio" id="not-read" name="radio" checked value=false>
+                    <input type="radio" id="not-read" name="radio" checked value=false/>
                     <label for="not-read">Not Read</label>
                 </div>
                 <button id="submit-btn" type="submit" value="submit">Submit</button>
@@ -36,9 +41,7 @@
             </form>
             
         </div>
-        <div class="footer">
-
-        </div>
+        <div class="footer"></div>
     </div>
 
 

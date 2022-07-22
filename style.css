@@ -1,7 +1,8 @@
 *{
-    font-family:'Courier New', Courier, monospace
+    font-family:'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
 }
-
 
 .container{
     margin: 0;
@@ -20,15 +21,26 @@
     grid-template-columns: repeat(5, 1fr)
 
 }
-/* .project-title{
-    font-family: 'Courier New', Courier, monospace;
-} */
-.heading > h2 {
-    grid-area: 1/1/2/3 ;
-    place-self:center;
+
+.myLibrary{
+    grid-area: 1/1/2/3;
+    display: grid;
+    grid-template: 1fr/1fr 1fr;
+
 }
-.heading > .add-book {
-    grid-area: 1/5/2/6;
+
+.myLibrary > span{
+    grid-area: 1/1/2/2;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 5px;
+}
+.myLibrary > h2{
+    grid-area: 1/2/2/3;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 #main{
@@ -45,7 +57,7 @@
     border-radius: 5px;
     grid-area: 1/6/2/7;
     height: 300px;
-    width: 250px;
+    width: 240px;
     margin: 0px;
     background-color: #FFCB69;
     display: grid;

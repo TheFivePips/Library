@@ -27,8 +27,8 @@
                 <h4>Add a Book</h4>
 
                 <input required id="book-title" name="book-title" type="text"maxlength="50" minlength = "1" placeholder="Title"/>
-                <input id="book-author" name="book-author" type="text"required minlength = "1" placeholder="Author"/>
-                <input id="book-pages" name="book-pages" type="text" placeholder="Pages"/>
+                <input id="book-author" name="book-author" type="text"required minlength = "2" placeholder="Author"/>
+                <input id="book-pages" name="book-pages" min="1" max="9999" type="number" required placeholder="Pages"/>
 
                 <div class="radio-btns">
                     <input type="radio" id="read" name="radio" value=true/>

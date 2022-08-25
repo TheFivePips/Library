@@ -22,14 +22,25 @@ Book.prototype.toggleRead = function(){
 
 // take a book object from the form and put it into the array
 function add_to_myLibrary(){
-    const formTitle = myForm.elements[0].value
-    const formAuthor = myForm.elements[1].value
-    const formPages = myForm.elements[2].value
+    const formTitle = document.getElementById('book-title')
+    const formAuthor = document.getElementById('book-author')
+    const formPages = document.getElementById('book-pages')
     const formRead = document.querySelector('input[name="radio"]:checked').value;
-
-    const newBook = new Book(formTitle, formAuthor, myLibrary.length, formPages, formRead)
-
-    myLibrary.push(newBook)
+    
+    if(formTitle.checkValidity() && formAuthor.checkValidity() && formPages.checkValidity()){
+        const newBook = new Book(formTitle.value, formAuthor.value, myLibrary.length, formPages.value, formRead)
+    
+        myLibrary.push(newBook)
+    }
+    if(!formTitle.checkValidity()){
+        alert(formTitle.validationMessage)
+    }
+    if(!formAuthor.checkValidity()){
+        alert(formAuthor.validationMessage)
+    }
+    if(!formPages.checkValidity()) {
+        alert(formPages.validationMessage)
+    }
     
 }
 

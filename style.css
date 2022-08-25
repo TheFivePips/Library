@@ -102,3 +102,10 @@ form > h4 {
     background-color: rgb(245, 236, 236);
     padding: 10px;
 }
+
+input:invalid{
+    color: rgb(237, 29, 29);
+}
+input:valid {
+    color: green;
+}
